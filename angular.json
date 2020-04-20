@@ -1,0 +1,208 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "laolol-spa": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/laolol-spa",
+      "sourceRoot": "projects/laolol-spa/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/laolol-spa",
+            "index": "projects/laolol-spa/src/index.html",
+            "main": "projects/laolol-spa/src/main.ts",
+            "polyfills": "projects/laolol-spa/src/polyfills.ts",
+            "tsConfig": "projects/laolol-spa/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/laolol-spa/src/favicon.ico",
+              "projects/laolol-spa/src/assets"
+            ],
+            "styles": [
+              "projects/laolol-spa/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/laolol-spa/src/environments/environment.ts",
+                  "with": "projects/laolol-spa/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "laolol-spa:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "laolol-spa:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "laolol-spa:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/laolol-spa/src/test.ts",
+            "polyfills": "projects/laolol-spa/src/polyfills.ts",
+            "tsConfig": "projects/laolol-spa/tsconfig.spec.json",
+            "karmaConfig": "projects/laolol-spa/karma.conf.js",
+            "assets": [
+              "projects/laolol-spa/src/favicon.ico",
+              "projects/laolol-spa/src/assets"
+            ],
+            "styles": [
+              "projects/laolol-spa/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/laolol-spa/tsconfig.app.json",
+              "projects/laolol-spa/tsconfig.spec.json",
+              "projects/laolol-spa/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/laolol-spa/e2e/protractor.conf.js",
+            "devServerTarget": "laolol-spa:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "laolol-spa:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "laolol-storybook": {
+      "projectType": "library",
+      "root": "projects/laolol-storybook",
+      "sourceRoot": "projects/laolol-storybook/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/laolol-storybook/tsconfig.lib.json",
+            "project": "projects/laolol-storybook/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/laolol-storybook/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/laolol-storybook/src/test.ts",
+            "tsConfig": "projects/laolol-storybook/tsconfig.spec.json",
+            "karmaConfig": "projects/laolol-storybook/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/laolol-storybook/tsconfig.lib.json",
+              "projects/laolol-storybook/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "laolol-components": {
+      "projectType": "library",
+      "root": "projects/laolol-components",
+      "sourceRoot": "projects/laolol-components/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/laolol-components/tsconfig.lib.json",
+            "project": "projects/laolol-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/laolol-components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/laolol-components/src/test.ts",
+            "tsConfig": "projects/laolol-components/tsconfig.spec.json",
+            "karmaConfig": "projects/laolol-components/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/laolol-components/tsconfig.lib.json",
+              "projects/laolol-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "defaultProject": "laolol-spa"
+}
