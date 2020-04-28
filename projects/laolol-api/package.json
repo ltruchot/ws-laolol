@@ -5,7 +5,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "serve": "pm2 start index.js"
+    "serve": "pm2 start index.js",
+    "stop": "pm2 stop index.js",
+    "ssh": "ssh -i 'laolol-server.pem' ubuntu@ec2-18-234-189-31.compute-1.amazonaws.com",
+    "copyenv": "scp -i 'laolol-server.pem' ./.env ubuntu@ec2-18-234-189-31.compute-1.amazonaws.com:~/ws-laolol/projects/laolol-api"
   },
   "author": "",
   "license": "ISC",
